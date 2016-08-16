@@ -1,0 +1,28 @@
+*.class
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+.tmp/
+/target/
+/book-store-logic/target/
+/book-store-api/target/
+
+#NetBeans
+nbactions.xml
+/book-store-api/nb-configuration.xml
+
+#Tests
+/book-store-logic/derby.log
+/book-store-api/derby.log
+
+#Bower
+/book-store-api/src/main/webapp/bower_components/
