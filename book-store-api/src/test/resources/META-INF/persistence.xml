@@ -7,6 +7,7 @@
         <class>co.edu.uniandes.csw.bookstore.entities.AuthorEntity</class>
         <class>co.edu.uniandes.csw.bookstore.entities.EditorialEntity</class>
         <class>co.edu.uniandes.csw.bookstore.entities.ScoreEntity</class>
+        <class>co.edu.uniandes.csw.bookstore.entities.ContactEntity</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <shared-cache-mode>NONE</shared-cache-mode>
         <properties>

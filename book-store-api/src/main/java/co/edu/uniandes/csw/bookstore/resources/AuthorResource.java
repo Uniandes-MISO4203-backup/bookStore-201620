@@ -159,4 +159,10 @@ public class AuthorResource {
         return AuthorBooksResource.class;
     }
     
+    @Path("{authorsId: \\d+}/contacts")
+    public Class<ContactResource> getContactResource(@PathParam("authorsId") Long authorsId){
+        existsAuthor(authorsId);
+        return ContactResource.class;
+    }
+    
 }

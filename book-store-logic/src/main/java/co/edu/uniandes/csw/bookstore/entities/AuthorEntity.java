@@ -30,6 +30,8 @@ import uk.co.jemos.podam.common.PodamExclude;
 import javax.persistence.ManyToMany;
 import java.util.List;
 import java.util.ArrayList;
+import javax.persistence.CascadeType;
+import javax.persistence.OneToMany;
 
 /**
  * @generated
@@ -40,6 +42,18 @@ public class AuthorEntity extends BaseEntity implements Serializable {
     @PodamExclude
     @ManyToMany(mappedBy = "authors")
     private List<BookEntity> books = new ArrayList<>();
+    
+    @PodamExclude
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ContactEntity> contacts = new ArrayList<>();
+
+    public List<ContactEntity> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(List<ContactEntity> contacts) {
+        this.contacts = contacts;
+    }
 
     /**
      * Obtiene la colección de books.

@@ -23,31 +23,31 @@ SOFTWARE.
 */
 (function (ng) {
 
-    var mod = ng.module("authorModule");
+    var mod = ng.module("contactModule");
 
-    mod.controller("authorDetailCtrl", ['$scope', "$state", "author",
-        function ($scope, $state, author) {
-            $scope.currentRecord = author;
+    mod.controller("contactDetailCtrl", ['$scope', "$state", "contact",
+        function ($scope, $state, contact) {
+            $scope.currentRecord = contact;
             $scope.actions = {
                 create: {
                     displayName: 'Create',
                     icon: 'plus',
                     fn: function () {
-                        $state.go('authorNew');
+                        $state.go('contactNew');
                     }
                 },
                 edit: {
                     displayName: 'Edit',
                     icon: 'edit',
                     fn: function () {
-                        $state.go('authorEdit');
+                        $state.go('contactEdit');
                     }
                 },
                 delete: {
                     displayName: 'Delete',
                     icon: 'minus',
                     fn: function () {
-                        $state.go('authorDelete');
+                        $state.go('contactDelete');
                     }
                 },
                 refresh: {
@@ -60,20 +60,6 @@ SOFTWARE.
                 list: {
                     displayName: 'List',
                     icon: 'th-list',
-                    fn: function () {
-                        $state.go('authorList');
-                    }
-                },
-                books: {
-                    displayName: 'Books',
-                    icon: 'link',
-                    fn: function () {
-                        $state.go('authorBooksList');
-                    }
-                },
-                contacts: {
-                    displayName: 'Contacts',
-                    icon: 'link',
                     fn: function () {
                         $state.go('contactList');
                     }

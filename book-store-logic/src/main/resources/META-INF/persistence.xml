@@ -8,6 +8,7 @@
     <class>co.edu.uniandes.csw.bookstore.entities.AuthorEntity</class>
     <class>co.edu.uniandes.csw.bookstore.entities.EditorialEntity</class>
     <class>co.edu.uniandes.csw.bookstore.entities.ScoreEntity</class>
+    <class>co.edu.uniandes.csw.bookstore.entities.ContactEntity</class>
     <properties>
       <property name="eclipselink.logging.level" value="FINE"/>
       <property name="eclipselink.ddl-generation" value="create-or-extend-tables"/>
