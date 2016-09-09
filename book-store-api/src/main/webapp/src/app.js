@@ -29,6 +29,7 @@ SOFTWARE.
         'bookModule',
         'reviewModule',
         'authorModule',
+        'nationalityModule',
         'contactModule',
         'editorialModule',
         'scoreModule',

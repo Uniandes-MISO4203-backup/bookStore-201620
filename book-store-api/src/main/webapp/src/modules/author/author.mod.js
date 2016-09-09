@@ -33,6 +33,13 @@ SOFTWARE.
                 displayName: 'Name',
                 type: 'String',
                 required: true
+            },
+            nationality: {
+                displayName: 'Nationality',
+                type: 'Reference',
+                model: 'nationalityModel',
+                options: [],
+                required: true
             }        }
     });
 
@@ -52,6 +59,11 @@ SOFTWARE.
                     }
                 },
                 resolve: {
+                    references: ['$q', 'Restangular', function ($q, r) {
+                            return $q.all({
+                                nationality: r.all('nationalitys').getList()
+                            });
+                        }],
                     model: 'authorModel',
                     authors: ['Restangular', 'model', '$stateParams', function (r, model, $params) {
                             return r.all(model.url).getList($params);

@@ -31,6 +31,7 @@ import javax.persistence.ManyToMany;
 import java.util.List;
 import java.util.ArrayList;
 import javax.persistence.CascadeType;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 /**
@@ -46,6 +47,18 @@ public class AuthorEntity extends BaseEntity implements Serializable {
     @PodamExclude
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ContactEntity> contacts = new ArrayList<>();
+    
+    @PodamExclude
+    @ManyToOne
+    private NationalityEntity nationality;
+
+    public NationalityEntity getNationality() {
+        return nationality;
+    }
+
+    public void setNationality(NationalityEntity nationality) {
+        this.nationality = nationality;
+    }
 
     public List<ContactEntity> getContacts() {
         return contacts;

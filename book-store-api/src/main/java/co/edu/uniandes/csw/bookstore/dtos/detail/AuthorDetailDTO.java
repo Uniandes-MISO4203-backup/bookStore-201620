@@ -34,7 +34,8 @@ import uk.co.jemos.podam.common.PodamExclude;
 @XmlRootElement
 public class AuthorDetailDTO extends AuthorDTO{
 
-
+    @PodamExclude
+    private NationalityDTO nationality;
 
     /**
      * @generated
@@ -51,6 +52,9 @@ public class AuthorDetailDTO extends AuthorDTO{
      */
     public AuthorDetailDTO(AuthorEntity entity) {
         super(entity);
+        if (entity.getNationality()!=null){
+        this.nationality = new NationalityDTO(entity.getNationality());
+        }
         
     }
 
@@ -63,7 +67,20 @@ public class AuthorDetailDTO extends AuthorDTO{
     @Override
     public AuthorEntity toEntity() {
         AuthorEntity entity = super.toEntity();
+        if (this.getNationality()!=null){
+        entity.setNationality(this.getNationality().toEntity());
+        }
         return entity;
+    }
+    
+    
+
+    public NationalityDTO getNationality() {
+        return nationality;
+    }
+
+    public void setNationality(NationalityDTO nationality) {
+        this.nationality = nationality;
     }
 
 }
