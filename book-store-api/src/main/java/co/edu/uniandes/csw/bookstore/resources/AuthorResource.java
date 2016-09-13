@@ -20,7 +20,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-*/
+ */
 package co.edu.uniandes.csw.bookstore.resources;
 
 import co.edu.uniandes.csw.auth.provider.StatusCreated;
@@ -46,6 +46,7 @@ import javax.ws.rs.WebApplicationException;
 
 /**
  * URI: authors/
+ *
  * @generated
  */
 @Path("/authors")
@@ -53,12 +54,15 @@ import javax.ws.rs.WebApplicationException;
 @Produces(MediaType.APPLICATION_JSON)
 public class AuthorResource {
 
-    @Inject private IAuthorLogic authorLogic;
-    @Context private HttpServletResponse response;
-    @QueryParam("page") private Integer page;
-    @QueryParam("limit") private Integer maxRecords;
+    @Inject
+    private IAuthorLogic authorLogic;
+    @Context
+    private HttpServletResponse response;
+    @QueryParam("page")
+    private Integer page;
+    @QueryParam("limit")
+    private Integer maxRecords;
 
-   
     /**
      * Convierte una lista de AuthorEntity a una lista de AuthorDetailDTO.
      *
@@ -66,14 +70,13 @@ public class AuthorResource {
      * @return Lista de AuthorDetailDTO convertida.
      * @generated
      */
-    private List<AuthorDetailDTO> listEntity2DTO(List<AuthorEntity> entityList){
+    private List<AuthorDetailDTO> listEntity2DTO(List<AuthorEntity> entityList) {
         List<AuthorDetailDTO> list = new ArrayList<>();
         for (AuthorEntity entity : entityList) {
             list.add(new AuthorDetailDTO(entity));
         }
         return list;
     }
-
 
     /**
      * Obtiene la lista de los registros de Author
@@ -145,24 +148,30 @@ public class AuthorResource {
     public void deleteAuthor(@PathParam("id") Long id) {
         authorLogic.deleteAuthor(id);
     }
-    public void existsAuthor(Long authorsId){
+
+    public void existsAuthor(Long authorsId) {
         AuthorDetailDTO author = getAuthor(authorsId);
-        if (author== null) {
+        if (author == null) {
             throw new WebApplicationException(404);
         }
     }
-    
-    
+
     @Path("{authorsId: \\d+}/books")
-    public Class<AuthorBooksResource> getAuthorBooksResource(@PathParam("authorsId") Long authorsId){
+    public Class<AuthorBooksResource> getAuthorBooksResource(@PathParam("authorsId") Long authorsId) {
         existsAuthor(authorsId);
         return AuthorBooksResource.class;
     }
-    
+
     @Path("{authorsId: \\d+}/contacts")
-    public Class<ContactResource> getContactResource(@PathParam("authorsId") Long authorsId){
+    public Class<ContactResource> getContactResource(@PathParam("authorsId") Long authorsId) {
         existsAuthor(authorsId);
         return ContactResource.class;
     }
-    
+
+    @Path("{authorsId: \\d+}/awards")
+    public Class<AuthorAwardsResource> getAuthorAwardsResource(@PathParam("authorsId") Long authorsId) {
+        existsAuthor(authorsId);
+        return AuthorAwardsResource.class;
+    }
+
 }

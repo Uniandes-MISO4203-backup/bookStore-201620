@@ -20,7 +20,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-*/
+ */
 package co.edu.uniandes.csw.bookstore.entities;
 
 import java.io.Serializable;
@@ -43,14 +43,18 @@ public class AuthorEntity extends BaseEntity implements Serializable {
     @PodamExclude
     @ManyToMany(mappedBy = "authors")
     private List<BookEntity> books = new ArrayList<>();
-    
+
     @PodamExclude
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ContactEntity> contacts = new ArrayList<>();
-    
+
     @PodamExclude
     @ManyToOne
     private NationalityEntity nationality;
+
+    @PodamExclude
+    @OneToMany(mappedBy = "author")
+    private List<AwardEntity> awards = new ArrayList<>();
 
     public NationalityEntity getNationality() {
         return nationality;
@@ -87,4 +91,13 @@ public class AuthorEntity extends BaseEntity implements Serializable {
     public void setBooks(List<BookEntity> books) {
         this.books = books;
     }
+
+    public List<AwardEntity> getAwards() {
+        return awards;
+    }
+
+    public void setAward(List<AwardEntity> awards) {
+        this.awards = awards;
+    }
+
 }

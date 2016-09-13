@@ -33,7 +33,8 @@ SOFTWARE.
         'contactModule',
         'editorialModule',
         'scoreModule',
-        'authModule'
+        'authModule',
+        'awardModule'
     ]);
 
     mod.constant('baseUrl', 'api');

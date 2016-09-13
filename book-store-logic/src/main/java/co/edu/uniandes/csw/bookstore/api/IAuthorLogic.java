@@ -24,6 +24,7 @@ SOFTWARE.
 package co.edu.uniandes.csw.bookstore.api;
 
 import co.edu.uniandes.csw.bookstore.entities.AuthorEntity;
+import co.edu.uniandes.csw.bookstore.entities.AwardEntity;
 import co.edu.uniandes.csw.bookstore.entities.BookEntity;
 import java.util.List;
 
@@ -40,4 +41,10 @@ public interface IAuthorLogic {
     public BookEntity addBooks(Long authorId, Long booksId);
     public List<BookEntity> replaceBooks(Long authorId, List<BookEntity> list);
     public void removeBooks(Long authorId, Long booksId);
+    //Relación con awards
+    public List<AwardEntity> listAwards(Long authorId);
+    public AwardEntity getAwards(Long authorId, Long awardsId);
+    public AwardEntity addAwards(Long authorId, Long awardsId);
+    public List<AwardEntity> replaceAwards(Long authorId, List<AwardEntity> list);
+    public void removeAwards(Long authorId, Long awardsId);
 }

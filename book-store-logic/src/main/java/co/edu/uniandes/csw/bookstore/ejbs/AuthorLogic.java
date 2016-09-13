@@ -20,14 +20,16 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-*/
+ */
 package co.edu.uniandes.csw.bookstore.ejbs;
 
 import co.edu.uniandes.csw.bookstore.api.IAuthorLogic;
+import co.edu.uniandes.csw.bookstore.api.IAwardLogic;
 import co.edu.uniandes.csw.bookstore.entities.AuthorEntity;
 import co.edu.uniandes.csw.bookstore.persistence.AuthorPersistence;
 import co.edu.uniandes.csw.bookstore.entities.BookEntity;
 import co.edu.uniandes.csw.bookstore.api.IBookLogic;
+import co.edu.uniandes.csw.bookstore.entities.AwardEntity;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -39,10 +41,14 @@ import javax.persistence.NoResultException;
 @Stateless
 public class AuthorLogic implements IAuthorLogic {
 
-    @Inject private AuthorPersistence persistence;
+    @Inject
+    private AuthorPersistence persistence;
 
+    @Inject
+    private IBookLogic bookLogic;
 
-    @Inject private IBookLogic bookLogic;
+    @Inject
+    private IAwardLogic awardLogic;
 
     /**
      * Obtiene el número de registros de Author.
@@ -66,7 +72,8 @@ public class AuthorLogic implements IAuthorLogic {
     }
 
     /**
-     * Obtiene la lista de los registros de Author indicando los datos para la paginación.
+     * Obtiene la lista de los registros de Author indicando los datos para la
+     * paginación.
      *
      * @param page Número de página.
      * @param maxRecords Número de registros que se mostraran en cada página.
@@ -124,14 +131,14 @@ public class AuthorLogic implements IAuthorLogic {
     public void deleteAuthor(Long id) {
         persistence.delete(id);
     }
-  
 
     /**
      * Obtiene una colección de instancias de BookEntity asociadas a una
      * instancia de Author
      *
      * @param authorId Identificador de la instancia de Author
-     * @return Colección de instancias de BookEntity asociadas a la instancia de Author
+     * @return Colección de instancias de BookEntity asociadas a la instancia de
+     * Author
      * @generated
      */
     @Override
@@ -176,7 +183,8 @@ public class AuthorLogic implements IAuthorLogic {
      * Remplaza las instancias de Book asociadas a una instancia de Author
      *
      * @param authorId Identificador de la instancia de Author
-     * @param list Colección de instancias de BookEntity a asociar a instancia de Author
+     * @param list Colección de instancias de BookEntity a asociar a instancia
+     * de Author
      * @return Nueva colección de BookEntity asociada a la instancia de Author
      * @generated
      */
@@ -207,5 +215,52 @@ public class AuthorLogic implements IAuthorLogic {
     @Override
     public void removeBooks(Long authorId, Long booksId) {
         bookLogic.removeAuthors(booksId, authorId);
+    }
+
+    //Métodos de awards
+    @Override
+    public List<AwardEntity> listAwards(Long authorId) {
+        return getAuthor(authorId).getAwards();
+    }
+
+    @Override
+    public AwardEntity getAwards(Long authorId, Long awardsId) {
+        List<AwardEntity> list = getAuthor(authorId).getAwards();
+        AwardEntity awardEntity = new AwardEntity();
+        awardEntity.setId(awardsId);
+        int index = list.indexOf(awardEntity);
+        if (index >= 0) {
+            return list.get(index);
+        }
+        return null;
+    }
+
+    @Override
+    public AwardEntity addAwards(Long authorId, Long awardsId) {
+        AuthorEntity authorEntity = getAuthor(authorId);
+        AwardEntity awardsEntity = awardLogic.getAward(awardsId);
+        awardsEntity.setAuthor(authorEntity);
+        return awardsEntity;
+    }
+
+    @Override
+    public List<AwardEntity> replaceAwards(Long authorId, List<AwardEntity> list) {
+        AuthorEntity authorEntity = getAuthor(authorId);
+        List<AwardEntity> awardsList = awardLogic.getAwards();
+        for (AwardEntity award : awardsList) {
+            if (list.contains(award)) {
+                award.setAuthor(authorEntity);
+            } else if (award.getAuthor() != null && award.getAuthor().equals(authorEntity)) {
+                award.setAuthor(null);
+            }
+        }
+        authorEntity.setAward(list);
+        return authorEntity.getAwards();
+    }
+
+    @Override
+    public void removeAwards(Long authorId, Long awardsId) {
+        AwardEntity entity = awardLogic.getAward(awardsId);
+        entity.setAuthor(null);
     }
 }

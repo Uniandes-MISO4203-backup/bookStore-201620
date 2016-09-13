@@ -182,5 +182,52 @@ SOFTWARE.
                         }]
                 }
             });
+            
+            //Relación con awards
+            
+                 $sp.state('authorAwards', {
+                url: '/awards',
+                parent: 'authorDetail',
+                abstract: true,
+                views: {
+                    authorChieldView: {
+                        template: '<div ui-view="authorAwardsView"></div>'
+                    }
+                },
+                resolve: {
+                    awards: ['author', function (author) {
+                            return author.getList('awards');
+                        }],
+                    model: 'awardModel'
+                }
+            });
+            $sp.state('authorAwardsList', {
+                url: '/list',
+                parent: 'authorAwards',
+                views: {
+                    authorAwardsView: {
+                        templateUrl: baseInstancePath + 'awards/list/author.awards.list.tpl.html',
+                        controller: 'authorAwardsListCtrl'
+                    }
+                }
+            });
+            $sp.state('authorAwardsEdit', {
+                url: '/edit',
+                parent: 'authorAwards',
+                views: {
+                    authorAwardsView: {
+                        templateUrl: baseInstancePath + 'awards/edit/author.awards.edit.tpl.html',
+                        controller: 'authorAwardsEditCtrl',
+                        controllerAs: 'ctrl'
+                    }
+                },
+                resolve: {
+                    pool: ['Restangular', 'model', function (r, model) {
+                            return r.all(model.url).getList();
+                        }]
+                }
+            });
+            
+            
 	}]);
 })(window.angular);

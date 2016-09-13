@@ -1,5 +1,5 @@
 {
-    "name": "BookStore",
+    "name": "bookstore",
     "license": "MIT",
     "dependencies": {
         "ng-crud": "^0.2.0",

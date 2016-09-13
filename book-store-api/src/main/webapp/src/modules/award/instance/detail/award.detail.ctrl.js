@@ -23,31 +23,31 @@
  */
 (function (ng) {
 
-    var mod = ng.module("authorModule");
+    var mod = ng.module("awardModule");
 
-    mod.controller("authorDetailCtrl", ['$scope', "$state", "author",
-        function ($scope, $state, author) {
-            $scope.currentRecord = author;
+    mod.controller("awardDetailCtrl", ['$scope', "$state", "award",
+        function ($scope, $state, award) {
+            $scope.currentRecord = award;
             $scope.actions = {
                 create: {
                     displayName: 'Create',
                     icon: 'plus',
                     fn: function () {
-                        $state.go('authorNew');
+                        $state.go('awardNew');
                     }
                 },
                 edit: {
                     displayName: 'Edit',
                     icon: 'edit',
                     fn: function () {
-                        $state.go('authorEdit');
+                        $state.go('awardEdit');
                     }
                 },
                 delete: {
                     displayName: 'Delete',
                     icon: 'minus',
                     fn: function () {
-                        $state.go('authorDelete');
+                        $state.go('awardDelete');
                     }
                 },
                 refresh: {
@@ -61,28 +61,7 @@
                     displayName: 'List',
                     icon: 'th-list',
                     fn: function () {
-                        $state.go('authorList');
-                    }
-                },
-                books: {
-                    displayName: 'Books',
-                    icon: 'link',
-                    fn: function () {
-                        $state.go('authorBooksList');
-                    }
-                },
-                contacts: {
-                    displayName: 'Contacts',
-                    icon: 'link',
-                    fn: function () {
-                        $state.go('contactList');
-                    }
-                },
-                awards: {
-                    displayName: 'Awards',
-                    icon: 'link',
-                     fn: function () {
-                        $state.go('authorAwardsList');
+                        $state.go('awardList');
                     }
                 }
             };
