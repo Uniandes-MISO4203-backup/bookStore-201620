@@ -1,8 +1,8 @@
 # Tabla de contenidos
 -  [Introducción](#introducción)
 -  [API](#api-de-la-aplicación-bookstore)
-  - [Recurso Book](#recurso-book)
-    - [GET /books](#GET-/books)
+  - [Recurso Bookasasas](#recurso-book)
+    - [GET /books](#get-/books)
     - [GET /books/{id}](#GET-/books/{id})
     - [POST /books](#POST-/books)
     - [PUT /books/{id}](#PUT-/books/{id})
